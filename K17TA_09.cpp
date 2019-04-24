@@ -75,16 +75,31 @@ int main()
     // priority
     for(int i =1;i<=P_no;i++)
     {
-    prior[i] =(float)(1+(float)(wait[i]/B[i]));
+    prior[i] =1+(wait[i]/B[i]);
 	}
    // av_wt = (float)tot/P_no;
     
-	cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime"<<"\tWaiting\n";
+cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime"<<"\tWaiting"<<"\tpriority\n";
 	for(int i =1;i<=P_no;i++)
+	{
+		cout<<p[i]<<"\t\t"<<A[i]<<"\t\t"<<B[i]<<"\t\t"<<compli[i]<<"\t\t"<<tat[i]<<"\t\t"<<wait[i]<<"\t\t"<<prior[i]<<"\n";
+		
+	}
+		int sum1 =0;
+	for(int i =P_no;i>0;i--)
+	{
+		sum1+=B[i];
+		compli[i] =sum1;
+		tat[i] = compli[i]-A[i];
+		wait[i] = tat[i] -B[i];
+	
+    }
+
+	cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime"<<"\tWaiting\n";
+	for(int i =P_no;i>0;i--)
 	{
 		cout<<p[i]<<"\t\t"<<A[i]<<"\t\t"<<B[i]<<"\t\t"<<compli[i]<<"\t\t"<<tat[i]<<"\t\t"<<wait[i]<<"\n";
 		
 	}
-//	cout<<av_wt;
 	
 }
