@@ -4,8 +4,8 @@ int main()
 {
 	//Input Area
 	
-	int P_no,next,temp1,tot=0;
-	float av_wt=0,av_tat=0;
+	int P_no,next,temp1;
+	float av_wait=0,av_tat=0,total1=0,total2=0;
 	cout<<"No. of process"<<"\n";
 	cin>>P_no;
 	int p[P_no],A[P_no],B[P_no],wait[P_no],compli[P_no],tat[P_no],prior[P_no];
@@ -17,9 +17,9 @@ int main()
 		
 		cin>>A[i]>>B[i];
 	}
-	//Display Area
-	    cout<<"\tYour Entered details :"<<"\n\n";
-	cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\n";
+	                //Display Area of 
+	    cout<<"\t\tYour Entered details :"<<"\n\n";
+	cout<<"Process No. "<<"\tArival Time"<<"\tBurst Time"<<"\n";
 	for(int i =1;i<=P_no;i++)
 	{
 		cout<<p[i]<<"\t\t"<<A[i]<<"\t\t"<<B[i]<<"\n";
@@ -54,7 +54,6 @@ int main()
 		p[next] = temp1;	
 	}
 	
-	//wait[1] =0;
 	int sum =0;
 	for(int i =1;i<=P_no;i++)
 	{
@@ -65,11 +64,11 @@ int main()
 	
     }
     
-      cout<<"\tYour Entered details :"<<"\n\n";
-	cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime"<<"\tWaiting\n";
+      cout<<"\n\t\tAfter sorting according to arival time and burst time :"<<"\n\n";
+	cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime(ct-at)"<<"\tWaiting(tat-bt)\n";
 	for(int i =1;i<=P_no;i++)
 	{
-		cout<<p[i]<<"\t\t"<<A[i]<<"\t\t"<<B[i]<<"\t\t"<<compli[i]<<"\t\t"<<tat[i]<<"\t\t"<<wait[i]<<"\n";
+		cout<<p[i]<<"\t\t"<<A[i]<<"\t\t"<<B[i]<<"\t\t"<<compli[i]<<"\t\t"<<tat[i]<<"\t\t\t\t"<<wait[i]<<"\n";
 		
 	}
     // priority
@@ -77,14 +76,14 @@ int main()
     {
     prior[i] =1+(wait[i]/B[i]);
 	}
-   // av_wt = (float)tot/P_no;
-    
-cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime"<<"\tWaiting"<<"\tpriority\n";
+     cout<<"\n\t\tAfter calculating priority from formula 1+wait[i]/Burst[i]\n\n";
+cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime"<<"\tWaiting"<<"\t\tpriority\n";
 	for(int i =1;i<=P_no;i++)
 	{
 		cout<<p[i]<<"\t\t"<<A[i]<<"\t\t"<<B[i]<<"\t\t"<<compli[i]<<"\t\t"<<tat[i]<<"\t\t"<<wait[i]<<"\t\t"<<prior[i]<<"\n";
 		
 	}
+	//
 		int sum1 =0;
 	for(int i =P_no;i>0;i--)
 	{
@@ -94,12 +93,21 @@ cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnAro
 		wait[i] = tat[i] -B[i];
 	
     }
-
+    for(int i =0;i<P_no;i++)
+    {
+    	total1+=tat[i];
+    	total2 +=wait[i];
+	}
+	av_tat = total1/P_no;
+	av_wait = total2/P_no;
+    cout<<"\n\t\t Calculating C.T, T.A.T, W.T According to Higher priority to lower priority\n\n";
 	cout<<"Process No."<<"\tArival Time"<<"\tBurst Time"<<"\tComplition"<<"\tturnArountTime"<<"\tWaiting\n";
 	for(int i =P_no;i>0;i--)
 	{
 		cout<<p[i]<<"\t\t"<<A[i]<<"\t\t"<<B[i]<<"\t\t"<<compli[i]<<"\t\t"<<tat[i]<<"\t\t"<<wait[i]<<"\n";
 		
 	}
+	cout<<"\n\nAverage TurnAroundTime:"<<av_tat<<"\n";
+	cout<<"Average WaitingTime:"<<av_wait;
 	
 }
